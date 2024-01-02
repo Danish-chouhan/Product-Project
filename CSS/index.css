@@ -9,7 +9,7 @@
     justify-content: space-around;
 }
 
-#Product {
+.Product {
     height: 180px;
     display: flex;
     flex-direction: column;
