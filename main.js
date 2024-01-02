@@ -31,21 +31,68 @@ const mainContainerOfProduct = document.createElement("div");
 mainContainerOfProduct.classList.add("maiContainer");
 body.appendChild(mainContainerOfProduct);
 
-dataArray.forEach(element => {
-  const containerProduct = createAndAppendProduct("div", "Product", mainContainerOfProduct);
+dataArray.forEach((element) => {
+  const containerProduct = createAndAppendProduct(
+    "div",
+    "Product",
+    mainContainerOfProduct
+  );
 
-  createAndAppendProduct("h2", "ProductPrice", containerProduct, `<span id="Rupee">₹</span>${element.Price}<span id="Only">only</span>`);
-  createAndAppendProduct("p", "ProductName", containerProduct, `${element.Name}, ${element.Quentity}`);
+  createAndAppendProduct(
+    "h2",
+    "ProductPrice",
+    containerProduct,
+    `<span id="Rupee">₹</span>${element.Price}<span id="Only">only</span>`
+  );
+  createAndAppendProduct(
+    "p",
+    "ProductName",
+    containerProduct,
+    `${element.Name}, ${element.Quentity}`
+  );
 
-  const containerOfPrice = createAndAppendProduct("div", "price", containerProduct);
+  const containerOfPrice = createAndAppendProduct(
+    "div",
+    "price",
+    containerProduct
+  );
 
-  createAndAppendProduct("p", null, containerOfPrice, `MRP Rs : <del>${element.mrp}</del>`);
-  createAndAppendProduct("p", null, containerOfPrice, `Price : <span id="Rupee">₹</span>${element.Rate}`);
+  createAndAppendProduct(
+    "p",
+    null,
+    containerOfPrice,
+    `MRP Rs : <del>${element.mrp}</del>`
+  );
+  createAndAppendProduct(
+    "p",
+    null,
+    containerOfPrice,
+    `Price : <span id="Rupee">₹</span>${element.Rate}`
+  );
+
+  // extra btns
+
+  const extraBtnsContainer = createAndAppendProduct(
+    "div",
+    "extraBtnsContainer",
+    containerProduct
+  );
+
+  const creatingBtns = () => {
+    createAndAppendProduct("button", "editBtn", extraBtnsContainer, "Edit","editBtn");
+    createAndAppendProduct("button", "deleteBtn", extraBtnsContainer, "Delete","deleteBtn");
+
+    containerProduct.removeEventListener("mouseover", creatingBtns);
+  };
+
+  containerProduct.addEventListener("mouseover", creatingBtns);
 });
 
-function createAndAppendProduct(tag, className, parent, innerHTML) {
+// function to create element
+function createAndAppendProduct(tag, className, parent, innerHTML,idName) {
   const element = document.createElement(tag);
   if (className) element.classList.add(className);
+  if (idName) element.setAttribute("id",idName)
   if (innerHTML) element.innerHTML = innerHTML;
   parent.appendChild(element);
   return element;
