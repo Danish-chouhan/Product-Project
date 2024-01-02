@@ -1,0 +1,43 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.maiContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 200px);
+    justify-content: space-around;
+}
+
+#Product {
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 300px;
+    border-bottom: 1px solid black;
+}
+
+.maiContainer h2,
+p {
+    text-align: center;
+}
+
+h2 {
+    font-size: 35px;
+}
+
+#Rupee {
+    font-weight: 200;
+    margin-right: 2px;
+}
+
+#Only {
+    margin-left: 8px;
+    font-size: 15px;
+}
+
+.price {
+    display: flex;
+    justify-content: space-between;
+}
