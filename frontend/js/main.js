@@ -77,23 +77,52 @@ dataArray.forEach((element) => {
     "extraBtnsContainer",
     containerProduct
   );
-
   const creatingBtns = () => {
-    createAndAppendProduct("button", "editBtn", extraBtnsContainer, "Edit","editBtn");
-    createAndAppendProduct("button", "deleteBtn", extraBtnsContainer, "Delete","deleteBtn");
+    const editBtn = createAndAppendProduct(
+      "button",
+      "editBtn",
+      extraBtnsContainer,
+      "Edit",
+      "editBtn"
+    );
+   const deleteBtn = createAndAppendProduct(
+      "button",
+      "deleteBtn",
+      extraBtnsContainer,
+      "Delete",
+      "deleteBtn"
+    );
+    editBtn.addEventListener("click", edit_Btn);
+    deleteBtn.addEventListener("click",delete_Btn)
+    function edit_Btn(){
+      editBtn.removeEventListener("click", edit_Btn);
 
+     const Editform = createAndAppendProduct("form","EditForm",body)
+     createAndAppendProduct("input","productPrice",Editform,null,null,"number","productPrice")
+     createAndAppendProduct("input","productName",Editform,null,null,"text","productName")
+     createAndAppendProduct("input","productQuantity",Editform,null,null,"text","productQuantity")
+     createAndAppendProduct("input","mrp",Editform,null,null,"number","mrp")
+     createAndAppendProduct("input","currentRate",Editform,null,null,"number","currentRate")
+     createAndAppendProduct("input","submit",Editform,null,null,"submit","submit")
+    }
+    function delete_Btn(){
+      containerProduct.remove()
+    }
     containerProduct.removeEventListener("mouseover", creatingBtns);
   };
 
   containerProduct.addEventListener("mouseover", creatingBtns);
+
 });
 
 // function to create element
-function createAndAppendProduct(tag, className, parent, innerHTML,idName) {
+function createAndAppendProduct(tag, className, parent, innerHTML, idName,type,placeholder) {
   const element = document.createElement(tag);
   if (className) element.classList.add(className);
-  if (idName) element.setAttribute("id",idName)
+  if (idName) element.setAttribute("id", idName)
   if (innerHTML) element.innerHTML = innerHTML;
+  if (type) element.type = type;
+  if (placeholder) element.setAttribute("placeholder",placeholder);
   parent.appendChild(element);
   return element;
 }
