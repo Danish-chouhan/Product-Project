@@ -41,3 +41,6 @@ h2 {
     display: flex;
     justify-content: space-between;
 }
+.productContainer{
+    background-color: aqua;
+}

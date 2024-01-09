@@ -1,128 +1,95 @@
-const productList = [];
+const mainContainer = createAndAppend("div", "class", "mainContainer", document.body);
 
-const form = document.querySelector("form");
+const DataEntryForm = createAndAppend("form", "class", "DataEntryForm", mainContainer, null, null, "submit");
+let MRP = createAndAppend("input", "type", "number", DataEntryForm, null, null, null, "MRP");
+let productPrice = createAndAppend("input", "type", "number", DataEntryForm, null, null, null, "Product Price");
+let productName = createAndAppend("input", "type", "text", DataEntryForm, null, null, null, "Product Name");
+let productQuantity = createAndAppend("input", "type", "number", DataEntryForm, null, null, null, "Product Quantity");
+let submitDataEntry = createAndAppend("input", "type", "submit", DataEntryForm, null, null, null, "submit");
 
-const productPrice = document.getElementById("Product-Price");
-const productName = document.getElementById("Product-Name");
-const productQuentity = document.getElementById("Product-Quentity");
-const mrp = document.getElementById("MRP");
-const currentRate = document.getElementById("Current-Rate");
-form.addEventListener("submit", (ele) => {
-  ele.preventDefault();
-  const Product = {
-    Price: productPrice.value,
-    Name: productName.value,
-    Quentity: productQuentity.value,
-    mrp: mrp.value,
-    Rate: currentRate.value,
-  };
-  productList.push(Product);
-  const productListData = JSON.stringify(productList);
-
-  localStorage.setItem("productData", productListData);
-});
-
-// --------------------Products
-
-const body = document.querySelector("body");
-const dataArray = JSON.parse(localStorage.getItem("productData") || []);
-
-const mainContainerOfProduct = document.createElement("div");
-mainContainerOfProduct.classList.add("maiContainer");
-body.appendChild(mainContainerOfProduct);
-
-dataArray.forEach((element) => {
-  const containerProduct = createAndAppendProduct(
-    "div",
-    "Product",
-    mainContainerOfProduct
-  );
-
-  createAndAppendProduct(
-    "h2",
-    "ProductPrice",
-    containerProduct,
-    `<span id="Rupee">₹</span>${element.Price}<span id="Only">only</span>`
-  );
-  createAndAppendProduct(
-    "p",
-    "ProductName",
-    containerProduct,
-    `${element.Name}, ${element.Quentity}`
-  );
-
-  const containerOfPrice = createAndAppendProduct(
-    "div",
-    "price",
-    containerProduct
-  );
-
-  createAndAppendProduct(
-    "p",
-    null,
-    containerOfPrice,
-    `MRP Rs : <del>${element.mrp}</del>`
-  );
-  createAndAppendProduct(
-    "p",
-    null,
-    containerOfPrice,
-    `Price : <span id="Rupee">₹</span>${element.Rate}`
-  );
-
-  // extra btns
-
-  const extraBtnsContainer = createAndAppendProduct(
-    "div",
-    "extraBtnsContainer",
-    containerProduct
-  );
-  const creatingBtns = () => {
-    const editBtn = createAndAppendProduct(
-      "button",
-      "editBtn",
-      extraBtnsContainer,
-      "Edit",
-      "editBtn"
-    );
-   const deleteBtn = createAndAppendProduct(
-      "button",
-      "deleteBtn",
-      extraBtnsContainer,
-      "Delete",
-      "deleteBtn"
-    );
-    editBtn.addEventListener("click", edit_Btn);
-    deleteBtn.addEventListener("click",delete_Btn)
-    function edit_Btn(){
-      editBtn.removeEventListener("click", edit_Btn);
-
-     const Editform = createAndAppendProduct("form","EditForm",body)
-     createAndAppendProduct("input","productPrice",Editform,null,null,"number","productPrice")
-     createAndAppendProduct("input","productName",Editform,null,null,"text","productName")
-     createAndAppendProduct("input","productQuantity",Editform,null,null,"text","productQuantity")
-     createAndAppendProduct("input","mrp",Editform,null,null,"number","mrp")
-     createAndAppendProduct("input","currentRate",Editform,null,null,"number","currentRate")
-     createAndAppendProduct("input","submit",Editform,null,null,"submit","submit")
-    }
-    function delete_Btn(){
-      containerProduct.remove()
-    }
-    containerProduct.removeEventListener("mouseover", creatingBtns);
-  };
-
-  containerProduct.addEventListener("mouseover", creatingBtns);
-
-});
-
-// function to create element
-function createAndAppendProduct(tag, className, parent, innerHTML, idName,type,placeholder) {
+function createAndAppend(tag, attType, attName, parent, text, targetTag, event, placeholder, extraEvent) {
   const element = document.createElement(tag);
-  if (className) element.classList.add(className);
-  if (idName) element.setAttribute("id", idName)
-  if (innerHTML) element.innerHTML = innerHTML;
-  if (type) element.type = type;
-  if (placeholder) element.setAttribute("placeholder",placeholder);
-  parent.appendChild(element);
+
+  if (!!attType && !!attName) {
+    element.setAttribute(attType, attName);
+  }
+  if (!!placeholder) {
+    element.setAttribute("placeholder", placeholder);
+  }
+  if (!!parent) {
+    parent.append(element);
+  }
+  if (!!text) {
+    element.innerText = text;
+  }
+  if (!!event || !!extraEvent) {
+    (element || targetTag).addEventListener((event || extraEvent), listener);
+
+    function listener(e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      if (e.type === "submit") {
+        console.log(e.target);
+        if(e.target.classList[0]=== "DataEntryForm"){         
+          const productContainer = createAndAppend("div", "class", "productContainer", mainContainer, null, null,"mouseover");
+
+          const productPrices = createAndAppend("div", "class", "productPrices", productContainer);
+          const Mrp = createAndAppend("p", "class", "productMrp", productPrices, `MRP: ${MRP.value}`);
+          const Price = createAndAppend("h1", "class", "productPrice", productPrices, `₹ ${productPrice.value} only`);
+          const nameAndQuantity = createAndAppend("p", "class", "nameAndQuantity", productPrices, `${productName.value}, ${productQuantity.value} gm`);
+        }
+        
+      }
+      if (e.type === "mouseover") {
+        const productContainerVar1 = document.querySelector(".productContainer");
+        const buttonContainer = productContainerVar1.querySelector(".buttonContainer");
+      
+        if (!buttonContainer) {
+          const buttonContainer = createAndAppend("div", "class", "buttonContainer", productContainerVar1);
+          const editButton = createAndAppend("button", "class", "editButton", buttonContainer, "Edit", null, "click");
+          const deleteBtn = createAndAppend("button", "class", "deleteButton", buttonContainer, "Delete", null, "click");
+        }
+      }
+      if(e.type === "click"){
+      if(e.target.classList[0] === "editButton"){
+
+        const productContainerVar2 = document.querySelector(".productContainer")
+          const innerItems = productContainerVar2.querySelectorAll(".productPrices > *");
+          
+          const popEditContainer = createAndAppend("div","class","container",mainContainer)
+          const formPopContainer = createAndAppend("form","class","formPopContainer",popEditContainer,null,null,"sub")
+          const cancelPopEdit = createAndAppend("button","class","cancelContainer",formPopContainer,"X")
+          const mrpPopEdit = createAndAppend("input","type","number",formPopContainer)
+          const pricePopEdit = createAndAppend("input","type","number",formPopContainer)
+          const namePopEdit = createAndAppend("input","type","text",formPopContainer)
+          const quantityPopEdit = createAndAppend("input","type","number",formPopContainer)
+          const submitPopEdit = createAndAppend("input","type","submit",formPopContainer)
+
+          formPopContainer.addEventListener("submit",(e)=>{
+            e.preventDefault()
+            innerItems.forEach(item => {
+              if (item.classList.contains("productMrp")) {
+                item.innerText = `MRP: ${mrpPopEdit.value}`;
+              }
+              if (item.classList.contains("productPrice")) {
+                item.innerText =`₹ ${pricePopEdit.value} only`;
+              }
+              if (item.classList.contains("nameAndQuantity")) {
+                item.innerText = `${namePopEdit.value}, ${quantityPopEdit.value} gm`;
+              }
+            });
+            popEditContainer.remove()
+          })
+      }
+      if (e.currentTarget.classList[0] === "deleteButton") {
+        // Code to delete productContainer
+        const productContainerVar = document.querySelector(".productContainer");
+        productContainerVar.remove();
+      }
+      }
+    }
+  }
+
   return element;
 }
