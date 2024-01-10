@@ -6,7 +6,7 @@ let productPrice = createAndAppend("input", "type", "number", DataEntryForm, nul
 let productName = createAndAppend("input", "type", "text", DataEntryForm, null, null, null, "Product Name");
 let productQuantity = createAndAppend("input", "type", "number", DataEntryForm, null, null, null, "Product Quantity");
 let submitDataEntry = createAndAppend("input", "type", "submit", DataEntryForm, null, null, null, "submit");
-
+const maincontainerOfProduct = createAndAppend("div","class","MainContainerOfProduct",mainContainer)
 function createAndAppend(tag, attType, attName, parent, text, targetTag, event, placeholder, extraEvent) {
   const element = document.createElement(tag);
 
@@ -32,7 +32,7 @@ function createAndAppend(tag, attType, attName, parent, text, targetTag, event, 
       if (e.type === "submit") {
         console.log(e.target);
         if(e.target.classList[0]=== "DataEntryForm"){         
-          const productContainer = createAndAppend("div", "class", "productContainer", mainContainer, null, null,"mouseover");
+          const productContainer = createAndAppend("div", "class", "productContainer", maincontainerOfProduct, null, null,"mouseover");
 
           const productPrices = createAndAppend("div", "class", "productPrices", productContainer);
           const Mrp = createAndAppend("p", "class", "productMrp", productPrices, `MRP: ${MRP.value}`);
@@ -53,7 +53,7 @@ function createAndAppend(tag, attType, attName, parent, text, targetTag, event, 
       }
       if(e.type === "click"){
       if(e.target.classList[0] === "editButton"){
-
+         
         const productContainerVar2 = document.querySelector(".productContainer")
           const innerItems = productContainerVar2.querySelectorAll(".productPrices > *");
           
@@ -61,11 +61,15 @@ function createAndAppend(tag, attType, attName, parent, text, targetTag, event, 
           const formPopContainer = createAndAppend("form","class","formPopContainer",popEditContainer,null,null,"sub")
           const cancelPopEdit = createAndAppend("button","class","cancelContainer",formPopContainer,"X")
           const mrpPopEdit = createAndAppend("input","type","number",formPopContainer)
+          mrpPopEdit.setAttribute("class", "mrpPopEdit")
           const pricePopEdit = createAndAppend("input","type","number",formPopContainer)
+          pricePopEdit.setAttribute("class", "pricePopEdit")
           const namePopEdit = createAndAppend("input","type","text",formPopContainer)
+          namePopEdit.setAttribute("class", "namePopEdit")
           const quantityPopEdit = createAndAppend("input","type","number",formPopContainer)
+          quantityPopEdit.setAttribute("class", "quantityPopEdit")
           const submitPopEdit = createAndAppend("input","type","submit",formPopContainer)
-
+         submitPopEdit.setAttribute("class", "submitBtn")
           formPopContainer.addEventListener("submit",(e)=>{
             e.preventDefault()
             innerItems.forEach(item => {
