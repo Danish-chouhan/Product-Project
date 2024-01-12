@@ -1,17 +1,16 @@
-
-.mainContainer{
+.mainContainer {
     display: grid;
     grid-template-rows: 100px 1fr;
 }
 
-.MainContainerOfProduct{
+.MainContainerOfProduct {
     display: grid;
-    grid-template-columns: repeat(3,450px);
+    grid-template-columns: repeat(3, 415px);
 }
 
 /* product container */
 
-.productContainer{
+.productContainer {
     border-radius: 20px;
     margin: 20px;
     display: flex;
@@ -21,7 +20,7 @@
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.62);
 }
 
-.productPrices{
+.productPrices {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -31,21 +30,23 @@
 }
 
 
-.buttonContainer{
+.buttonContainer {
     width: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
-.productPrice{
-    align-self:center;
+
+.productPrice {
+    align-self: center;
 }
-.productMrp{
+
+.productMrp {
     align-self: flex-start;
     margin-left: 20px;
 }
 
-.buttonContainer button{
+.buttonContainer button {
     height: 40px;
     width: 90px;
     margin: 10px;
@@ -53,9 +54,10 @@
     border: none;
     background-color: transparent;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.533);
+    cursor: pointer;
 }
 
-.buttonContainer button:hover{
+.buttonContainer button:hover {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.245);
     transition: 0.3s ease-in-out;
 }
@@ -67,16 +69,17 @@
     left: 400px;
     width: 500px;
     height: 400px;
-    background: rgba(23, 22, 22, 0.5);
+    background: rgba(83, 83, 83, 0.5);
     backdrop-filter: blur(5px);
     justify-content: center;
     align-items: center;
-    border: 2px solid black;
+    border: 2px solid rgb(84, 84, 84);
     border-radius: 20px;
 }
+
 .formPopContainer {
     display: grid;
-    grid-template-columns: 200px;
+    grid-template-columns: 400px;
     justify-content: center;
     height: 50vh;
     align-items: center;
@@ -92,32 +95,68 @@
     width: 35px;
     font-size: 20px;
     border-radius: 30px;
+    margin-left: 400px;
+    box-shadow: 0px 0px 10px rgba(20, 19, 19, 0.533);
+
 }
-.cancelContainer:hover{
-background-color: red;
-color: white;
-transition: 0.3s ease-in-out;
+
+.cancelContainer:hover {
+    background-color: red;
+    color: white;
+    transition: 0.3s ease-in-out;
 }
+
 .mrpPopEdit,
 .pricePopEdit,
 .namePopEdit,
 .quantityPopEdit {
-    border-radius: 20px;
-    padding: 10px;
+    border-radius: 10px;
+    padding: 12px;
     margin-top: 20px;
+    text-align: center;
+    box-shadow: 0px 0px 10px rgba(20, 19, 19, 0.533);
+    border: none;
 }
-.pricePopEdit {
-    margin-left: 20px;
-}
+
 .submitBtn {
     padding: 5px;
     font-size: 15px;
     margin-top: 30px;
-    margin-left: 30px;
-    margin-right: 30px;
+    margin-left: 100px;
+    margin-right: 100px;
     border-radius: 20px;
     cursor: pointer;
+    box-shadow: 0px 0px 10px rgba(20, 19, 19, 0.533);
+    border: none;
 }
-.UUID{
+
+.UUID {
     display: none;
+}
+
+@media only screen and (min-width: 601px) and (max-width: 1200px) {
+    .MainContainerOfProduct {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media only screen and (min-width: 1201px) {
+    .MainContainerOfProduct {
+        grid-template-columns: repeat(3, 415px);
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .MainContainerOfProduct {
+        grid-template-columns: repeat(1, 415px);
+        justify-content: center;
+    }
+
+}
+
+@media only screen and (max-width: 480px) {
+    .MainContainerOfProduct {
+        grid-template-columns: repeat(1, 415px);
+        justify-content: center;
+    }
 }
