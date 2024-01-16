@@ -34,10 +34,14 @@ function createAndAppend(tag, attType, attName, parent, text, targetTag, event, 
         if (e.target.classList[0] === "DataEntryForm") {
           const productContainer = createAndAppend("div", "class", "productContainer", maincontainerOfProduct, null, null, "mouseover");
           const productPrices = createAndAppend("div", "class", "productPrices", productContainer);
-          const UUID = createAndAppend("p", "class", "UUID", productPrices, generateUUID())
-          const Mrp = createAndAppend("p", "class", "productMrp", productPrices, `MRP: ${MRP.value}`);
+          const UUID   = createAndAppend("p", "class", "UUID", productPrices, generateUUID())
+          const Mrp   = createAndAppend("p", "class", "productMrp", productPrices, `MRP: ${MRP.value}`);
           const Price = createAndAppend("h1", "class", "productPrice", productPrices, `₹ ${productPrice.value} only`);
           const nameAndQuantity = createAndAppend("p", "class", "nameAndQuantity", productPrices, `${productName.value}, ${productQuantity.value} gm`);
+          MRP.value = ""
+          productPrice.value = ""
+          productName.value = ""
+          productQuantity.value = ""
         }
       }
 
@@ -52,13 +56,19 @@ function createAndAppend(tag, attType, attName, parent, text, targetTag, event, 
           const deleteBtn = createAndAppend("button", "class", "deleteButton", buttonContainer, "Delete", null, "click");
         }
       }
+      if (e.type === "mousedown") {
+
+        const productContainerVar1 = e.currentTarget
+        const buttonContainer = productContainerVar1.querySelector(".buttonContainer");
+        console.log(buttonContainer);
+      }
       if (e.type === "click") {
         if (e.target.classList[0] === "editButton") {
           const productContainerVar2 = e.currentTarget.parentElement.parentElement
           const innerItems = productContainerVar2.querySelectorAll(".productPrices > *");
           const popEditContainer = createAndAppend("div", "class", "container", mainContainer)
           const formPopContainer = createAndAppend("form", "class", "formPopContainer", popEditContainer, null, null, "submit")
-          const cancelPopEdit = createAndAppend("button", "class", "cancelContainer", formPopContainer, "X")
+          const cancelPopEdit = createAndAppend("button", "class", "cancelContainer", formPopContainer, "X",null,"click")
           const mrpPopEdit = createAndAppend("input", "type", "number", formPopContainer, null, null, null, "MRP")
           mrpPopEdit.setAttribute("class", "mrpPopEdit")
           const pricePopEdit = createAndAppend("input", "type", "number", formPopContainer, null, null, null, "Product Price")
@@ -86,6 +96,11 @@ function createAndAppend(tag, attType, attName, parent, text, targetTag, event, 
             popEditContainer.remove()
           })
         }
+        if(e.target.classList[0] === "cancelContainer"){
+          const popUpContainer = document.querySelector(".container")
+          popUpContainer.remove()
+        }
+        console.log(e.target.classList[0]);
         if (e.target.classList[0] === "deleteButton") {
           const productContainerVar = e.currentTarget.parentElement.parentElement;
           productContainerVar.remove();
