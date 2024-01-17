@@ -90,7 +90,6 @@
     flex-direction: column;
     align-items: center;
     word-wrap: break-word;
-    overflow: hidden;
 }
 
 .cancelContainer {
