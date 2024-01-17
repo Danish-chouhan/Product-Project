@@ -1,11 +1,9 @@
-.mainContainer {
-    display: grid;
-    grid-template-rows: 100px 1fr;
-}
 
 .MainContainerOfProduct {
-    display: grid;
-    grid-template-columns: repeat(3, 415px);
+    /* display: grid;
+    grid-template-columns: repeat(3, 415px); */
+    display: flex;
+    flex-wrap: wrap;
 }
 
 /* product container */
@@ -15,7 +13,7 @@
     margin: 20px;
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
+    justify-content: center;
     align-items: center;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.62);
 }
@@ -26,7 +24,8 @@
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    width: 100%;
+    width: 90%;
+    word-wrap: break-word;
 }
 
 
@@ -75,17 +74,27 @@
     align-items: center;
     border: 2px solid rgb(84, 84, 84);
     border-radius: 20px;
+    overflow: hidden;
+    box-sizing: border-box;
 }
 
 .formPopContainer {
-    display: grid;
+    /* display: grid;
     grid-template-columns: 400px;
     justify-content: center;
     height: 50vh;
+    align-items: center; */
+    height: 50vh;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    word-wrap: break-word;
+    overflow: hidden;
 }
 
 .cancelContainer {
+    float: right;
     margin-top: 20px;
     margin-bottom: 20px;
     font-size: 22px;
@@ -116,12 +125,13 @@
     text-align: center;
     box-shadow: 0px 0px 10px rgba(20, 19, 19, 0.533);
     border: none;
+    
 }
 
 .submitBtn {
     padding: 5px;
     font-size: 15px;
-    margin-top: 30px;
+    margin-top: 10px;
     margin-left: 100px;
     margin-right: 100px;
     border-radius: 20px;
@@ -133,30 +143,131 @@
 .UUID {
     display: none;
 }
+p.nameAndQuantity{
+    overflow-wrap: break-word;
+}
 
-@media only screen and (min-width: 601px) and (max-width: 1200px) {
-    .MainContainerOfProduct {
-        grid-template-columns: repeat(2, 1fr);
+
+@media (max-width:576px) {
+    .MainContainerOfProduct{
+        /* max-width: 1140px; */
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .productContainer{
+        /* flex: 0 0 auto; */
+        width: 100%;
+    }
+
+    .container{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        width: 90%;
+        /* padding: 20px; */
+    }
+
+    .cancelContainer{
+        margin-top: 15px;
+        margin-left: 280px;
+    }
+
+    .formPopContainer 
+    .mrpPopEdit,
+    .pricePopEdit,
+    .namePopEdit,
+    .quantityPopEdit
+     {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 4px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    /* border-radius: 4px; */
+}
+}
+
+@media only screen and (min-width: 577px) and (max-width: 992px){
+    .MainContainerOfProduct{
+        /* max-width: 1140px; */
+        /* display: flex;
+        flex-wrap: wrap; */
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    .container{
+        height: 500px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        width: 80%;
+    }
+    .cancelContainer{
+        margin-top: 15px;
+        margin-left: 90%;
+    }
+
+    .formPopContainer 
+    .mrpPopEdit,
+    .pricePopEdit,
+    .namePopEdit,
+    .quantityPopEdit{
+    height: 50px;
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 4px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+}
+
+.submitBtn{
+    width: 130px;
+    padding: 13px;
+    font-size: 17px;
+    margin-top: 30px;
+    /* margin-left: 100px;
+    margin-right: 100px; */
     }
 }
 
-@media only screen and (min-width: 1201px) {
-    .MainContainerOfProduct {
-        grid-template-columns: repeat(3, 415px);
+@media (min-width: 993px) {
+    .MainContainerOfProduct{
+        /* max-width: 1140px; */
+        /* display: flex;
+        flex-wrap: wrap; */
+        display: grid;
+        grid-template-columns: repeat(4 , 1fr);
+        
     }
-}
 
-@media only screen and (max-width: 600px) {
-    .MainContainerOfProduct {
-        grid-template-columns: repeat(1, 415px);
+    .container {
+        position: absolute;
+        position: fixed;
+        top: 100px;
+        left: 400px;
+        width: 500px;
+        height: 400px;
+    }
+    .formPopContainer {
+        display: grid;
+        grid-template-columns: 400px;
         justify-content: center;
+        height: 50vh;
+        align-items: center;
     }
-
-}
-
-@media only screen and (max-width: 480px) {
-    .MainContainerOfProduct {
-        grid-template-columns: repeat(1, 415px);
-        justify-content: center;
+    .cancelContainer{
+        margin-left: 400px;
+    }
+    .submitBtn{
+        width: 130px;
+        padding: 13px;
+        font-size: 17px;
+        margin-top: 30px;
+        /* margin-left: 110px; */
+        margin-left: 130px;
+        margin-right: 100px;
     }
 }
