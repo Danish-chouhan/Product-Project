@@ -1,4 +1,3 @@
-
 .MainContainerOfProduct {
     /* display: grid;
     grid-template-columns: repeat(3, 415px); */
@@ -160,7 +159,7 @@ p.nameAndQuantity{
     }
 
     .container{
-        position: absolute;
+        position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%,-50%);
@@ -198,7 +197,7 @@ p.nameAndQuantity{
     }
     .container{
         height: 500px;
-        position: absolute;
+        position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%,-50%);
