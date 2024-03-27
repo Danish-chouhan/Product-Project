@@ -7,7 +7,7 @@
 
 /* product container */
 
-.productContainer {
+.productContainer  {
     border-radius: 20px;
     margin: 20px;
     display: flex;
@@ -144,6 +144,93 @@
 }
 p.nameAndQuantity{
     overflow-wrap: break-word;
+}
+.card {
+    position: relative;
+    width: 200px;
+    height: 250px;
+    background-color: #f0f0f0;
+    border-radius: 20px;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.62);
+    overflow: hidden;
+  }
+  
+  .card .options {
+    position: absolute;
+    top: 0;
+    right: -80px;
+    width: 100px;
+    height: 100%;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0;
+    background-color: rgba(183, 183, 183, 0.245);
+    transition: transform 0.3s, opacity 0.3s;
+  }
+  
+  .card:hover .options {
+    transform: translateX(-80px);
+    opacity: 1;
+  }
+  
+  .option {
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .option:hover {
+    background-color: #ddd;
+  }
+.editFormContainer{
+    position: absolute;
+    left: 50%;
+    right: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 300px;
+    background-color: rgba(51, 51, 51,0.5);
+    display: none;
+}
+.close{
+    width: 100%;
+    display: flex;
+    justify-content: right;
+    margin: 10px;
+
+}
+.editForm input{
+    padding: 5px;
+    width: 80%;
+    margin: 20px;
+}
+.close span{
+    width: 50px;
+    align-items: center;
+    cursor: pointer;
+}
+.btnContainer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.btnContainer button{
+    padding: 5px;
+    margin-left: 20px;
+}
+.editFormContainer{
+    display: none;
+}
+.confirm{
+    cursor: pointer;
 }
 
 
