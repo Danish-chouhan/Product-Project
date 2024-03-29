@@ -228,11 +228,14 @@ p.nameAndQuantity{
 }
 .editFormContainer{
     display: none;
+    background-color: #757575;
+    height: max-content;
+    padding: 20px;
 }
 .confirm{
     cursor: pointer;
 }
-
+ 
 
 @media (max-width:576px) {
     .MainContainerOfProduct{
