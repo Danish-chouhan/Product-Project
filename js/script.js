@@ -21,11 +21,11 @@ function appendChildren(parent, ...children) {
 function addCard(inputBoxes, selectValue, operationType, existingCards) {
   if (operationType === "CreateNewCard") {
     const values = [];
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 4; i++) {
       const value = inputBoxes[i].value;
       values.push(value);
     }
-    const [MRP, Price, productName] = values;
+    const [MRP, Price, productName, quantityProduct] = values;
     const UUIDValue = generateUUID();
     const productContainer = createElementWithClass("div", "productContainer");
 
@@ -45,7 +45,7 @@ function addCard(inputBoxes, selectValue, operationType, existingCards) {
     const nameAndQuantity = createElementWithClass(
       "p",
       "nameAndQuantity",
-      `<span>${productName}</span>` + `<span> ${selectValue}</span>`
+      `<span> ${productName} </span>` + `<span> ${quantityProduct} </span>` +`<span> ${selectValue} </span>`
     );
 
     appendChildren(
@@ -97,9 +97,9 @@ function submitValidity() {
 function editCard() {
   const card = event.target.closest(".productContainer");
   card.id = "needChange";
-  const existingInputsContianer = card.querySelectorAll("span");
-  const priviousSelectValue =
-    card.querySelector(".nameAndQuantity").lastElementChild.textContent;
+  const existingInputsContianer = Array.from(card.querySelectorAll("span"));
+  existingInputsContianer.pop();
+  const priviousSelectValue = card.querySelector(".nameAndQuantity").lastElementChild.textContent;
   const editsInputs = editFormContainer.querySelectorAll("input");
   const editSelectValue = editFormContainer.querySelector("select");
   const options = Array.from(editFormContainer.querySelectorAll("option"));
@@ -108,8 +108,15 @@ function editCard() {
       editSelectValue.options[i].selected = true;
     }
   }
+  console.log(existingInputsContianer, editsInputs);
   editsInputs.forEach((el, idx) => {
-    el.value = existingInputsContianer[idx].textContent;
+    const convertInNumber = +existingInputsContianer[idx].textContent;
+    if(Number.isNaN(convertInNumber)){
+      el.value = existingInputsContianer[idx].textContent;
+    }else{
+      el.value = +existingInputsContianer[idx].textContent;
+
+    }
   });
 
   editFormContainer.style.display = "block";
@@ -158,7 +165,7 @@ function handleConfirmAction() {
   if (existingCard && isInputValid) {
     const spans = existingCard.querySelectorAll(".productPrices span");
     inputFields.forEach((input, index) => {
-      spans[index].textContent = input.value;
+      spans[index].textContent = ` ${input.value} `;
     });
     existingCard.querySelector(
       ".nameAndQuantity"
